@@ -240,9 +240,6 @@ export const getFilePreview = async (
         ImageGravity.Top,
         100,
       )
-    // else throw new Error('Invalid file type')
-    //
-    // if (!fileUrl) throw new Error('Failed to generate file preview')
 
     return fileUrl
   } catch (error) {
@@ -265,9 +262,7 @@ export const uploadFile = async (file: FileType, type: 'video' | 'image') => {
   try {
     const uploadedFile = await storage.createFile(storageId, ID.unique(), asset)
 
-    const fileUrl = await getFilePreview(uploadedFile.$id, type)
-
-    return fileUrl
+    return await getFilePreview(uploadedFile.$id, type)
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message)
